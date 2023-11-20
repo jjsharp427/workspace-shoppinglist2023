@@ -36,22 +36,24 @@
   <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyAzcwgZuLA7dO9g4sQhXQVTUgCo0M8m2qM",
-      authDomain: "grocerylist-91956.firebaseapp.com",
-      databaseURL: "https://grocerylist-91956.firebaseio.com",
-      projectId: "grocerylist-91956",
-      storageBucket: "grocerylist-91956.appspot.com",
-      messagingSenderId: "813812426276",
-      appId: "1:813812426276:web:93e5897af12892ff78dab1",
-      measurementId: "G-VZ83BTR72T"
-    }; 
+  const firebaseConfig = {
+    apiKey: "AIzaSyAsYoFfwUbzeJgKNGnp9m0uNQQukx7gecE",
+    authDomain: "database1-9a23b.firebaseapp.com",
+    projectId: "database1-9a23b",
+    storageBucket: "database1-9a23b.appspot.com",
+    messagingSenderId: "86486126439",
+    appId: "1:86486126439:web:1012829861c6359505a9c2",
+    measurementId: "G-8D43VGFTBB"
+  };
     // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       const db = firebase.firestore();
 
     // Save the list to database
 
+  $("#save").click(function(){
+    db.collection("shoppingList").add({item: "pan"});
+  });
 
   </script>
 
