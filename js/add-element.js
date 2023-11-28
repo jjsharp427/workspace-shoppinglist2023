@@ -31,15 +31,19 @@ function addElement() {
 // bind click with the event handler
 $('li').click(changeStyle);
 //  click the li element will change the changeStyle
-//  three style : complete, cool, hot
+//  three styles : complete, cool, hot
 function changeStyle() {
   if ($(this).hasClass("cool")) {
     $(this).removeClass("cool");
     $(this).addClass("complete");
   }
-  else {
+  else if ($(this).hasClass("hot")) {
     $(this).removeClass("hot");
     $(this).addClass("complete");
+  }
+  else {
+    $(this).removeClass("complete");
+    $(this).addClass("cool");
   }
 }
 

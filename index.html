@@ -24,9 +24,9 @@
     </h2>
     <ul id="todo">
       <li id="one" class="hot"><em>fresh</em> figs</li>
-      <li id="two" class="hot">pine nuts</li>
+      <li id="two" class="hot">milk</li>
       <li id="three" class="hot">honey</li>
-      <li id="four">balsamic vinegar</li>
+      <li id="four">cookies</li>
     </ul>
     <h2 id="save"> Save </h2>
   </div>
@@ -50,29 +50,38 @@
       const db = firebase.firestore();
 
     // Read data from the database
-    $("li").remove();
 
     db.collection("shoppingList").get().then((querySnapshot) => {
-      var items = [];
-      querySnapshot.forEach((doc) => {
+      var items = "";
+      querySnapshot.array.forEach((doc) => {
         var item = doc.data().item;
-        console.log("Loading ",item);
-        items+= "<li class = 'cool'>"+item+"</li>"
-        $("#todo").append("<li class = 'cool'>"+item+"</li>");
+        console.log(item);
+        console.log("Loading",item);
+        items+="<li class = 'cool'>"+item+"</li>";
+        // Add the item to the list
+        $("#todo").append(items);
+        $("li").click(function(){
+          $(this).toggleClass("cool");
       });
-      // Add the item to the list
+      });
+      
     });
+    // display saved items when screen is refreshed
 
     // Save the list to database
   $("#save").click(function(){
     // testing if the database is connected
     // clear database before saving
-    db.clear();
+    db.collection("shoppinglist").get().then((querySnapshot)=>{
+        querySnapshot.forEach((doc)=>{
+          doc.ref.delete();
+        })
+      });
     $("li").each(function(){
       var value = ($(this).text());
-      console.log("Saving ",value);
+      console.log("Saving",value);
+      db.collection("shoppinglist").add({item:value});
     });
-    db.collection("shoppingList").add({item: "pan"});
   });
 
   </script>
