@@ -29,7 +29,9 @@ function addElement() {
   $('li').click(changeStyle); 
 }
 // bind click with the event handler
-$('li').click(changeStyle);
+$('li').click(function() {
+  changeStyle();
+});
 //  click the li element will change the changeStyle
 //  three styles : complete, cool, hot
 function changeStyle() {

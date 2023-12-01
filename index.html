@@ -51,40 +51,38 @@
 
     // Read data from the database
 
-    db.collection("shoppingList").get().then((querySnapshot) => {
+    db.collection("shoppingList")
+    .get()
+    .then((querySnapshot) => {
       var items = "";
-      querySnapshot.array.forEach((doc) => {
+      querySnapshot.forEach((doc) => {
         var item = doc.data().item;
         console.log(item);
         console.log("Loading",item);
-        items+="<li class = 'cool'>"+item+"</li>";
+        items+="<li>"+item+"</li>";
+      });
         // Add the item to the list
-        $("#todo").append(items);
-        $("li").click(function(){
-          $(this).toggleClass("cool");
-      });
-      });
+      $("#todo").html(items);
       
     });
+    $('li').click(changeStyle); 
     // display saved items when screen is refreshed
 
     // Save the list to database
   $("#save").click(function(){
+    console.log("Saving...")
     // testing if the database is connected
     // clear database before saving
-    db.collection("shoppinglist").get().then((querySnapshot)=>{
+    db.collection("shoppingList").get().then((querySnapshot)=>{
         querySnapshot.forEach((doc)=>{
           doc.ref.delete();
         })
       });
-    $("li").each(function(){
-      var value = ($(this).text());
+    $("li").each(function() {
+      var value = $(this).text();
       console.log("Saving",value);
-      db.collection("shoppinglist").add({item:value});
+      db.collection("shoppingList").add({item:value});
     });
   });
-
   </script>
-
-
 </body>
